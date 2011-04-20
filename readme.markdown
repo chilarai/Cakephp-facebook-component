@@ -1,6 +1,6 @@
 # FACEOOK CAKEPHP INTEGRATION
 
-* Version 1.2
+* Version 1.4
 
 * Author : Chilarai Mushahary
 
@@ -10,7 +10,7 @@
 
 * License: GNU/GPL
 
-# CHANGELOG
+# CHANGELOG 1.3
 
 * 1.	Added 'app.tar.gz'.
 
@@ -23,6 +23,15 @@
 * 5.	Removed loopback in default.ctp
 
 * 6.	Complete 'app folder' with tests_controller and view files.
+
+CHANGELOG 1.4
+
+* 1.	Added sample tests_controller with the new component
+
+* 2.	Help file update
+
+* 3.	Added sample tests_controller.php
+
 
 # NOTE :	
 IN CASE YOU WANT TO COPY THE 'app' FOLDER, EXTRACT THE app.tar.gz AND REPLACE YOUR app FOLDER IN CAKEPHP.
@@ -43,7 +52,10 @@ ELSE IN CASE YOU FOLLOW THE STEPS BELOW, COPY THE 'facebook.php' COMPONENT FROM 
 
 	`Configure::write('AppUri','APP_ADDRESS');	//--> your app folder (eg localhost/cake)`
        
-    `Configure::write('CanvasPage','CANVAS_PAGE_URL');	//--> your canvas page (eg http://apps.facebook.com/APP_NAME)`
+   ` Configure::write('CanvasPage','CANVAS_PAGE_URL');	//--> your canvas page (eg http://apps.facebook.com/APP_NAME)``
+    
+    
+    All these parameters are obtained from facebook. visit http://facebook.com/developers/apps.php to see your apps
 
  	
  	
@@ -57,20 +69,21 @@ ELSE IN CASE YOU FOLLOW THE STEPS BELOW, COPY THE 'facebook.php' COMPONENT FROM 
 5.	Copy `default.ctp` file in your `app/views/layouts/` folder
 	
 
+## IMPORTANT 
+Do not use cakephp `$this->Session->write()` and `$this->redirect()`. Try to avoid them
+If you use them, the app will work perfectly in the server but will show bad looping behaviour in the canvas. Your app might even redirect back to the main server from the facebook app canvas.
+
+Facebook maintains its own session. You can obtain the data from facebook using the accessToken provided already in this component. Read through and you will understand
+
 ## EXAMPLES
 
 
 * In any controller, import the facebook component as:
 	
-	`var $components = array('Facebook');`
+	var $components = array('Facebook');
 
 * Then in any of the functions/actions you can type the following:
-	(in case the output is a "url", copy and paste the url in the browser. I still have to write the code for buttons)
 
-	* For the first time (only once), you need to type
-		`debug($this->Facebook->appUrl());` to create a new session with the application. Once a session is formed, you can continue with the steps below
-	
-	* Then at any point of time:
 		* To get your "friend list", type
 		`debug(json_decode(file_get_contents($this->Facebook->getFriends()),true);`
 
