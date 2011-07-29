@@ -10,6 +10,8 @@
 
 * License: GNU/GPL
 
+#### Please use the code from cakephp_facebook_integration_full_app_with_cakephp1_3_8_autoInstaller.tar.gz for latest updated code
+
 
 
 
